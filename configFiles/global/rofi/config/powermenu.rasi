@@ -1,0 +1,119 @@
+configuration {
+    show-icons:                     true;
+    display-drun: 		            "";
+    drun-display-format:            "{icon}";
+    disable-history:                false;
+    click-to-exit: 		            true;
+    location:                       0;
+}
+
+@import "font.rasi"
+@import "colors.rasi"
+
+window {
+    transparency:                   "real";
+    background-color:               @BG;
+    text-color:                     @FG;
+    border:                  	    1px;
+    border-color:                   @BDR;
+    border-radius:                  1px;
+    width:                          600px;
+    x-offset:                       0;
+    y-offset:                       0;
+}
+
+prompt {
+    enabled: 			            true;
+    margin: 			            0px 0px 0px 0px;
+    padding: 			            10px;
+    background-color: 		        @BG;
+    text-color: 		            @FG;
+    border:                  	    0px 0px 0px 0px;
+    border-color:                   @BDR;
+    border-radius:                  1px;
+}
+
+inputbar {
+    background-color:               @BG;
+}
+
+case-indicator {
+    background-color:               @BG;
+    text-color:                     @FG;
+    spacing:                        20px;
+}
+
+listview {
+    background-color:               @BG;
+    columns:                        5;
+    lines:			                1;
+    spacing:                        20px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               @BG;
+    children:                       [ listview ];
+    spacing:                        0px;
+    padding:                        10px;
+}
+
+element {
+    background-color:               @BG;
+    text-color:                     @FG;
+    orientation:                    horizontal;
+    border-radius:                  1px;
+    padding:                        10px -10px 10px -10px;
+}
+
+element-icon {
+    background-color: 		        inherit;
+    text-color:       		        inherit;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    size:                           0px;
+    border:                         0px;
+}
+
+element-text {
+    background-color: 		        inherit;
+    text-color:       		        inherit;
+    font:			                @reg-icon;
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    padding:                        5px;
+    margin:                         5px 5px 5px 5px;
+}
+
+element selected {
+    background-color:               @BGA;
+    text-color:                     @SEL;
+    border:                  	    0px 0px 0px 0px;
+    border-radius:                  1px;
+    border-color:                   @BDR;
+}
+
+element.active,
+element.selected.urgent {
+  background-color: @ON;
+  text-color: @BG;
+  border-color: @ON;
+}
+
+element.selected.urgent {
+  border-color: @BDR;
+}
+
+element.urgent,
+element.selected.active {
+  background-color: @OFF;
+  text-color: @BG;
+  border-color: @OFF;
+}
+
+element.selected.active {
+  border-color: @BDR;
+}

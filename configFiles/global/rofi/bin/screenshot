@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+rofi_command="rofi -theme $HOME/.config/rofi/config/screenshot.rasi"
+
+time=`date +%Y-%m-%d-%I-%M-%S`
+geometry=`xrandr | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current'`
+dir="$HOME/Pictures/Screenshots"
+file="Screenshot_${time}_${geometry}.png"
+
+# Icons
+icon1="$HOME/.config/dunst/icons/collections.svg"
+icon2="$HOME/.config/dunst/icons/timer.svg"
+
+# Buttons
+layout=`cat $HOME/.config/rofi/config/screenshot.rasi | grep BUTTON | cut -d'=' -f2 | tr -d '[:blank:],*/'`
+if [[ "$layout" == "TRUE" ]]; then
+	screen=" "
+	window=" "
+	area=" "
+else
+	screen="   Capture Desktop"
+	window="   Capture Window"
+	area="   Capture Area"
+fi
+
+# take shots
+shotnow () {
+	cd ${dir} && sleep 1  | maim -d 1 $file
+}
+
+shotwindow () {
+	cd ${dir} && sleep 1 | maim -i $(xdotool getactivewindow)  -d 1 $file
+}
+
+shotarea () {
+	cd ${dir} && sleep 1 | maim -s -d 1 $file && (xclip -selection clipboard -t image/png -i $file)
+}
+
+if [[ ! -d "$dir" ]]; then
+	mkdir -p "$dir"
+fi
+
+# Variable passed to rofi
+options="$screen\n$window\n$area"
+
+chosen="$(echo -e "$options" |  $rofi_command -p 'Screenshot Menu' -dmenu -selected-row 0)"
+case $chosen in
+    $screen)
+		shotnow
+        ;;
+    $window)
+		shotwindow
+        ;;
+	$area)
+		shotarea
+        ;;
+
+    esac
+
