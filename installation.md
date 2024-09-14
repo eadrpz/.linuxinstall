@@ -64,9 +64,17 @@ systemctl enable NetworkManager
 systemctl disable wpa_supplicant
 ```
 
+Go to /etc/network/interfaces and delete the added Network
+```
+nano /etc/network/interfaces
+```
+
+Go to /etc/NetworkManager/NetworkManager.conf and set managed to true
+```
+nano /etc/NetworkManager/NetworkManager.conf
+```
+
 Reboot and that's it
 ```sh
 reboot
 ```
-
-Log in as root
