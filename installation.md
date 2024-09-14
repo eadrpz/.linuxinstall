@@ -54,7 +54,7 @@ apt update & apt upgrade
 Install sudo and add your user to sudo group
 ```sh
 apt install sudo
-usermod -aG sudo,video,audio "YourUSERNAME"
+usermod -aG sudo,video,audio,input "YourUSERNAME"
 ```
 
 Now install Network Manager and disable wpa_supplicant
@@ -68,3 +68,5 @@ Reboot and that's it
 ```sh
 reboot
 ```
+
+Log in as root
